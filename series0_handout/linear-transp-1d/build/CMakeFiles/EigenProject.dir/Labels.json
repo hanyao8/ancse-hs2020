@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/EigenProject"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/EigenProject.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/EigenProject-complete.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-install.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-mkdir.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-download.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-update.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-patch.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-configure.rule"
+		},
+		{
+			"file" : "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/EigenProject-stamp/EigenProject-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"EigenProject"
+		],
+		"name" : "EigenProject"
+	}
+}

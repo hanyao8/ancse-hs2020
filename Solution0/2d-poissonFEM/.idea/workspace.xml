@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="2d-poissonlFEM" targetName="EigenProject" />
+      <config projectName="2d-poissonlFEM" targetName="unittest" />
+      <config projectName="2d-poissonlFEM" targetName="fem2d" />
+      <config projectName="2d-poissonlFEM" targetName="IGLProject" />
+      <config projectName="2d-poissonlFEM" targetName="GTestProject" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4c7f792f-4256-45da-8501-80452604f05b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../common_latex/fancytitle.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../common_latex/fancytitle.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../common_latex/header.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../common_latex/header.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../make_series1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../make_series1.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/boundary_condition.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/boundary_condition.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/cfl_condition.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/cfl_condition.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/numerical_flux.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/numerical_flux.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/reconstruction.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/reconstruction.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/runge_kutta.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/include/ancse/runge_kutta.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/boundary_condition.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/boundary_condition.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/cfl_condition.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/cfl_condition.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/fvm_rate_of_change.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/fvm_rate_of_change.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/runge_kutta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/code/src/ancse/runge_kutta.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/fvm_scalar_1d.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/fvm_scalar_1d/fvm_scalar_1d.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/linear-transp-1d/code/linear_transport.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/linear-transp-1d/code/linear_transport.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../problems/linear-transp-1d/linear-transp-1d.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../problems/linear-transp-1d/linear-transp-1d.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../series/series0.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../series/series0.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../series/series1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../series/series1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../series/series1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../series/series1.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../series/solution0.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../series/solution0.pdf" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1iEesX4HKqi6mROuNTQV2QANNCb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager" selected="CMake Application.fem2d">
+    <configuration name="EigenProject" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2d-poissonlFEM" TARGET_NAME="EigenProject" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GTestProject" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2d-poissonlFEM" TARGET_NAME="GTestProject" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IGLProject" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2d-poissonlFEM" TARGET_NAME="IGLProject" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fem2d" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2d-poissonlFEM" TARGET_NAME="fem2d" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="2d-poissonlFEM" RUN_TARGET_NAME="fem2d">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="unittest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2d-poissonlFEM" TARGET_NAME="unittest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="2d-poissonlFEM" RUN_TARGET_NAME="unittest">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.EigenProject" />
+      <item itemvalue="CMake Application.GTestProject" />
+      <item itemvalue="CMake Application.IGLProject" />
+      <item itemvalue="CMake Application.fem2d" />
+      <item itemvalue="CMake Application.unittest" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4c7f792f-4256-45da-8501-80452604f05b" name="Default Changelist" comment="" />
+      <created>1601477385038</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601477385038</updated>
+      <workItem from="1601477386793" duration="2877000" />
+      <workItem from="1601544319586" duration="1074000" />
+      <workItem from="1603471077751" duration="26000" />
+      <workItem from="1603471420940" duration="199000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

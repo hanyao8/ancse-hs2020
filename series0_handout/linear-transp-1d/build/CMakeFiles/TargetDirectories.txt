@@ -1,0 +1,4 @@
+/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/rebuild_cache.dir
+/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/edit_cache.dir
+/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/linear_transport.dir
+/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/EigenProject.dir
