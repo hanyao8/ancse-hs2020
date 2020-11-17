@@ -9,6 +9,8 @@
 class Model {
   public:
     inline double flux(double u) const { return 0.5 * u * u; }
+    inline double dflux_du(double u) const { return u; } //user defined
+    inline double flux_omega() const {return 0.0; } //user defined
 
     inline double max_eigenvalue(double u) const { return std::abs(u); }
 };

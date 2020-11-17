@@ -25,7 +25,18 @@ deduce_numerical_flux(const Grid &grid,
                             LaxFriedrichs(grid, model, simulation_time))
 
     // Register the other numerical fluxes.
-
+    REGISTER_NUMERICAL_FLUX("rusanov",
+                            Rusanov,
+                            Rusanov(grid, model, simulation_time))
+    REGISTER_NUMERICAL_FLUX("roe",
+                            Roe,
+                            Roe(grid, model, simulation_time))
+    REGISTER_NUMERICAL_FLUX("godunov",
+                            Godunov,
+                            Godunov(grid, model, simulation_time))
+    REGISTER_NUMERICAL_FLUX("engquist_osher",
+                            EngquistOsher,
+                            EngquistOsher(grid, model, simulation_time))
     throw std::runtime_error(
         fmt::format("Unknown numerical flux. {}", std::string(config["flux"])));
 }
