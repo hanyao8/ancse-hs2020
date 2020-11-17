@@ -18,6 +18,48 @@ inline double minmod(double a, double b) {
     return 0.5 * (sign(a) + sign(b)) * std::min(std::abs(a), std::abs(b));
 }
 
+inline double maxmod(double a, double b) {
+    return 0.5 * (sign(a) + sign(b)) * std::max(std::abs(a), std::abs(b));
+}
+
+inline double minabs(double a, double b) {
+    double result;
+    if (std::abs(a) < std::abs(b)) {
+        result = a;
+    }
+    else if (std::abs(a) > std::abs(b)) {
+        result = b;
+    }
+    else {
+        result = 0.5*(a+b);
+    }
+    return result;
+}
+
+inline double minmod3(double a, double b, double c) {
+    double result;
+    double epsilon = 0.001;
+    if ( sign(a)+sign(b)+sign(c)+epsilon > 3.0 ) {
+        result = std::min(std::abs(a),std::abs(b));
+	result = 1.0 * std::min(result,std::abs(c));
+    }
+    else if ( sign(a)+sign(b)+sign(c)-epsilon < 3.0 ) {
+        result = std::min(std::abs(a),std::abs(b));
+	result = -1.0 * std::min(result,std::abs(c));
+    }
+    else {
+        result = 0.0;
+    }
+    return result;
+}
+
+inline double vanleer(double a, double b) {
+    double w1 = std::abs(b)/(std::abs(b)+std::abs(a));
+    double w2 = std::abs(a)/(std::abs(b)+std::abs(a));
+    return w1*a+w2*b;
+}
+
+
 //----------------SlopeLimiterAEnd----------------
 
 //----------------SlopeLimiterBBegin----------------
@@ -26,6 +68,33 @@ struct MinMod {
         return minmod(sL, sR);
     }
 };
+
+struct MinAbs {
+    inline double operator()(double sL, double sR) const {
+        return minabs(sL, sR);
+    }
+};
+
+struct SuperBee {
+    inline double operator()(double sL, double sR) const {
+	double minmodL = minmod(2.0*sL, 1.0*sR);
+	double minmodR = minmod(1.0*sL, 2.0*sR);
+        return maxmod(minmodL, minmodR);
+    }
+};
+
+struct MonotonizedCentral {
+    inline double operator()(double sL, double sR) const {
+        return minmod3(2.0*sR,0.5*(sL+sR),2.0*sL);
+    }
+};
+
+struct VanLeer {
+    inline double operator()(double sL, double sR) const {
+        return vanleer(sL,sR);
+    }
+};
+
 //----------------SlopeLimiterBEnd----------------
 
 
@@ -61,8 +130,11 @@ class PWConstantReconstruction {
 template <class SlopeLimiter>
 class PWLinearReconstruction {
   public:
-    explicit PWLinearReconstruction(const SlopeLimiter &slope_limiter)
-        : slope_limiter(slope_limiter) {}
+    explicit PWLinearReconstruction(
+		    const SlopeLimiter &slope_limiter,
+		    const Grid &grid)
+        : slope_limiter(slope_limiter) {},
+	  grid(grid)
 
     std::pair<double, double> operator()(const Eigen::VectorXd &u,
                                          int i) const {
@@ -72,8 +144,20 @@ class PWLinearReconstruction {
     std::pair<double, double>
     operator()(double ua, double ub, double uc, double ud) const {
 
-        double uL = 0.0;
-        double uR = 0.0;
+	double dx = grid.dx;
+
+        //double uL = 0.0;
+        //double uR = 0.0;
+
+	auto sb = (ub-ua)/dx; //j
+	auto sc = (uc-ub)/dx; //j+1
+	auto sd = (ud-uc)/dx; //j+2
+
+	auto sigmaL = slope_limiter(sc,sb); //j
+	auto sigmaR = slope_limiter(sd,sc); //j+1
+
+	double uL = ub + 0.5*dx*sigmaL; //j
+	double uR = uc - 0.5*dx*sigmaR; //j+1
 
 
         return {uL, uR};
