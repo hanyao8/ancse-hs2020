@@ -1,1 +1,1 @@
-/Library/Developer/CommandLineTools/usr/bin/c++   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/linear_transport.dir/linear_transport.cpp.o  -o linear_transport 
+/usr/bin/c++     CMakeFiles/linear_transport.dir/linear_transport.cpp.o  -o linear_transport 

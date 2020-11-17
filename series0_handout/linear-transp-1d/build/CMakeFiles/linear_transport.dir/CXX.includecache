@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/linear_transport.cpp
+/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/linear_transport.cpp
 writer.hpp
-/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/writer.hpp
+/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/writer.hpp
 Eigen/Core
 -
 cmath
@@ -20,7 +20,7 @@ iostream
 stdexcept
 -
 
-/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/writer.hpp
+/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/writer.hpp
 cassert
 -
 cmath

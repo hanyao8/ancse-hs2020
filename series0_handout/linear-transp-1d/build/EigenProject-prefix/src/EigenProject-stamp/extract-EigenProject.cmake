@@ -1,7 +1,7 @@
 # Make file names absolute:
 #
-get_filename_component(filename "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip" ABSOLUTE)
-get_filename_component(directory "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/Eigen" ABSOLUTE)
+get_filename_component(filename "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/../../../eigen-3.3.7.zip" ABSOLUTE)
+get_filename_component(directory "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/Eigen" ABSOLUTE)
 
 message(STATUS "extracting...
      src='${filename}'

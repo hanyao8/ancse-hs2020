@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/linear_transport.cpp" "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/CMakeFiles/linear_transport.dir/linear_transport.cpp.o"
+  "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/linear_transport.cpp" "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/CMakeFiles/linear_transport.dir/linear_transport.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX

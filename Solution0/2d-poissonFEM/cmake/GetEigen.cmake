@@ -4,7 +4,7 @@ add_library(Eigen INTERFACE)
 
 ExternalProject_Add(
     EigenProject
-    URL https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.zip
+    URL ${CMAKE_CURRENT_BINARY_DIR}/../../../eigen-3.3.7.zip
     SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/Eigen
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""

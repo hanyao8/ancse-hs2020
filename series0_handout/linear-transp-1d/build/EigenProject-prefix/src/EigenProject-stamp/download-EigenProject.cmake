@@ -22,14 +22,14 @@ function(check_file_hash has_hash hash_is_good)
   set("${has_hash}" TRUE PARENT_SCOPE)
 
   message(STATUS "verifying file...
-       file='/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'")
+       file='/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'")
 
-  file("" "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip" actual_value)
+  file("" "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip" actual_value)
 
   if(NOT "${actual_value}" STREQUAL "")
     set("${hash_is_good}" FALSE PARENT_SCOPE)
     message(STATUS " hash of
-    /Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip
+    /home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip
   does not match expected value
     expected: ''
       actual: '${actual_value}'")
@@ -71,7 +71,7 @@ function(sleep_before_download attempt)
   execute_process(COMMAND "${CMAKE_COMMAND}" -E sleep "${sleep_seconds}")
 endfunction()
 
-if("/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip" STREQUAL "")
+if("/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip" STREQUAL "")
   message(FATAL_ERROR "LOCAL can't be empty")
 endif()
 
@@ -79,32 +79,32 @@ if("https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.zip" STREQUAL 
   message(FATAL_ERROR "REMOTE can't be empty")
 endif()
 
-if(EXISTS "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
+if(EXISTS "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
   check_file_hash(has_hash hash_is_good)
   if(has_hash)
     if(hash_is_good)
       message(STATUS "File already exists and hash match (skip download):
-  file='/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
+  file='/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
   =''"
       )
       return()
     else()
       message(STATUS "File already exists but hash mismatch. Removing...")
-      file(REMOVE "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
+      file(REMOVE "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
     endif()
   else()
     message(STATUS "File already exists but no hash specified (use URL_HASH):
-  file='/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
+  file='/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
 Old file will be removed and new file downloaded from URL."
     )
-    file(REMOVE "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
+    file(REMOVE "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
   endif()
 endif()
 
 set(retry_number 5)
 
 message(STATUS "Downloading...
-   dst='/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
+   dst='/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip'
    timeout='none'"
 )
 
@@ -121,7 +121,7 @@ foreach(i RANGE ${retry_number})
 
     file(
         DOWNLOAD
-        "${url}" "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip"
+        "${url}" "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip"
         SHOW_PROGRESS
         # no TIMEOUT
         STATUS status
@@ -137,7 +137,7 @@ foreach(i RANGE ${retry_number})
       check_file_hash(has_hash hash_is_good)
       if(has_hash AND NOT hash_is_good)
         message(STATUS "Hash mismatch, removing...")
-        file(REMOVE "/Users/hchoong/Desktop/github/ancse-hs20/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
+        file(REMOVE "/home/hanyao8/Desktop/github/ancse-hs20-2/series0_handout/linear-transp-1d/build/EigenProject-prefix/src/eigen-3.3.7.zip")
       else()
         message(STATUS "Downloading... done")
         return()

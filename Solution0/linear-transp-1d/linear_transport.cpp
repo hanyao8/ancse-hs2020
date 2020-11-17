@@ -145,7 +145,7 @@ int main() {
     double xL = 0.0;
     double xR = 5.0;
     auto domain = std::pair<double, double>{xL, xR};
-    auto a = [](double x) { return std::sin(2.0 * M_PI * x); };
+    auto a = [](double x) { return 2.0+std::sin(2.0 * M_PI * x); };
 
     Eigen::VectorXd u0(N);
     double h = (xR - xL) / (N - 1.0);
