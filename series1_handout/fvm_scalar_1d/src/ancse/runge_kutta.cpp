@@ -20,6 +20,8 @@ make_runge_kutta(const std::shared_ptr<RateOfChange> &rate_of_change,
 
     // Register your SSP2 class.
 
+    REGISTER_RUNGE_KUTTA("ssp2",SSP2);
+
     throw std::runtime_error(
         fmt::format("Unknown time-integrator. [{}]", rk_key));
 }
@@ -53,6 +55,16 @@ operator()(Eigen::VectorXd &u1, const Eigen::VectorXd &u0, double dt) const {
 
     // You can reduce memory consumption by using `u1` as the temporary
     // buffer `u_star`.
+
+    (*rate_of_change)(dudt, u0);
+    u1 = u0 + dt * dudt;
+
+    (*rate_of_change)(dudt, u1);
+    u1 = u1 + dt * dudt;
+
+    u1 = 0.5*(u0 + u1);
+
+    (*boundary_condition)(u1);
 
 }
 //----------------SSP2DefnEnd----------------
