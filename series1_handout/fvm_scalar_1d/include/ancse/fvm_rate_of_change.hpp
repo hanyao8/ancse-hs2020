@@ -30,7 +30,8 @@ class FVMRateOfChange : public RateOfChange {
     virtual void operator()(Eigen::VectorXd &dudt,
                             const Eigen::VectorXd &u0) const override {
         // implement the flux loop here.
-	int n_cells = dudt.size();
+	//int n_cells = dudt.size();
+	int n_cells = grid.n_cells;
 	double dx = grid.dx;
 	auto FL;
 	auto FR;
