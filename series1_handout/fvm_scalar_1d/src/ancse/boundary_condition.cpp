@@ -8,7 +8,10 @@ PeriodicBC::PeriodicBC(int n_ghost) : n_ghost(n_ghost) {}
 void PeriodicBC::operator()(Eigen::VectorXd &u) const {
     using index_t = Eigen::Index;
     index_t n_cells = u.size();
-
+    for (index_t i = 0; i < n_ghost; ++i) {
+        u[i] = u[n_cells-1-n_ghost+i];
+	u[n_cells-1-i] = u[n_ghost-i];
+    }
 }
 //----------------PeriodicBCDefnEnd----------------
 
