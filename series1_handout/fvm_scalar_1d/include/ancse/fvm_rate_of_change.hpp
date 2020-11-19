@@ -33,16 +33,17 @@ class FVMRateOfChange : public RateOfChange {
 	//int n_cells = dudt.size();
 	int n_cells = grid.n_cells;
 	double dx = grid.dx;
-	auto FL;
-	auto FR;
-	auto uLL;
-	auto uLR;
-	auto uRL;
-	auto uRR;
+	double FL,FR;
+	double uLL,uLR,uRL,uRR;
 
-	for (j=1;j<n_cells-1;j++) {
-	    uLL,uLR = reconstruction(u0,j-1);
-	    uRL,uRR = reconstruction(u0,j);
+	for (int j=1;j<n_cells-1;j++) {
+	    auto recL = reconstruction(u0,j-1);
+	    auto recR = reconstruction(u0,j);
+
+	    uLL = std::get<0>(recL);
+	    uLR = std::get<1>(recL);
+	    uRL = std::get<0>(recR);
+	    uRR = std::get<1>(recR);
 
 	    FL = numerical_flux(uLL,uLR); //-1/2
 	    FR = numerical_flux(uRL,uRR); //+1/2

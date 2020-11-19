@@ -84,8 +84,6 @@ class Rusanov {
           model(model) {}
 
     double operator()(double uL, double uR) const {
-        double dx = grid.dx;
-        double dt = simulation_time->dt;
 
         // Implement the LaxFriedrichs flux
 	auto fL = model.flux(uL);
@@ -118,10 +116,8 @@ class Roe {
 
     double operator()(double uL, double uR) const {
         // Implement the LaxFriedrichs flux
-	auto fL = model.flux(uL);
-	auto fR = model.flux(uR);
 
-	auto AM;
+	double AM;
 	if (uL!=uR) {
 	    AM = (model.flux(uR)-model.flux(uL))/(uR-uL);
 	}
@@ -129,7 +125,7 @@ class Roe {
 	    AM = model.dflux_du(uL);
 	}
 
-	auto Froe;
+	double Froe;
 	if (AM>=0) {
 	    Froe = model.flux(uL);
 	}
@@ -157,9 +153,9 @@ class Godunov {
     double operator()(double uL, double uR) const {
 
 	double omega = model.flux_omega();
-	auto f1 = model.flux(std::max(uL,omega))
-	auto f2 = model.flux(std::min(uR,omega))
-	double Fgod = std::max(f1,f2)
+	auto f1 = model.flux(std::max(uL,omega));
+	auto f2 = model.flux(std::min(uR,omega));
+	double Fgod = std::max(f1,f2);
 	return Fgod;
     }
 
@@ -182,8 +178,8 @@ class EngquistOsher {
     double operator()(double uL, double uR) const {
 
 	double omega = model.flux_omega();
-	auto f1 = model.flux(std::max(uL,omega))
-	auto f2 = model.flux(std::min(uR,omega))
+	auto f1 = model.flux(std::max(uL,omega));
+	auto f2 = model.flux(std::min(uR,omega));
 	double Feo = f1 + f2;
 	return Feo;
     }

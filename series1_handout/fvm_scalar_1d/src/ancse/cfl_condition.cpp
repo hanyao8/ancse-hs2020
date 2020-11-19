@@ -17,7 +17,7 @@ double StandardCFLCondition::operator()(const Eigen::VectorXd &u) const {
 
     double max_speed = 0.0;
     double tmp_speed = 0.0;
-    for (j=0;j<n_cells;j++) {
+    for (int j=0;j<n_cells;j++) {
 	tmp_speed = std::abs(model.dflux_du(u[j]));
         if (tmp_speed > max_speed) {
 	    max_speed = tmp_speed;

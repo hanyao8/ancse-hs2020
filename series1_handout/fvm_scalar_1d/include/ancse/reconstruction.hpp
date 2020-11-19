@@ -131,10 +131,8 @@ template <class SlopeLimiter>
 class PWLinearReconstruction {
   public:
     explicit PWLinearReconstruction(
-		    const SlopeLimiter &slope_limiter,
-		    const Grid &grid)
-        : slope_limiter(slope_limiter) {},
-	  grid(grid)
+		    const SlopeLimiter &slope_limiter)
+        : slope_limiter(slope_limiter) {}
 
     std::pair<double, double> operator()(const Eigen::VectorXd &u,
                                          int i) const {
@@ -144,20 +142,18 @@ class PWLinearReconstruction {
     std::pair<double, double>
     operator()(double ua, double ub, double uc, double ud) const {
 
-	double dx = grid.dx;
-
         //double uL = 0.0;
         //double uR = 0.0;
 
-	auto sb = (ub-ua)/dx; //j
-	auto sc = (uc-ub)/dx; //j+1
-	auto sd = (ud-uc)/dx; //j+2
+	auto sb = ub-ua; //j
+	auto sc = uc-ub; //j+1
+	auto sd = ud-uc; //j+2
 
 	auto sigmaL = slope_limiter(sc,sb); //j
 	auto sigmaR = slope_limiter(sd,sc); //j+1
 
-	double uL = ub + 0.5*dx*sigmaL; //j
-	double uR = uc - 0.5*dx*sigmaR; //j+1
+	double uL = ub + 0.5*sigmaL; //j
+	double uR = uc - 0.5*sigmaR; //j+1
 
 
         return {uL, uR};
