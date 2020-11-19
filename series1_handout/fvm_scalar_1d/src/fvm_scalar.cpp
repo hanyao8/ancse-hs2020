@@ -1,3 +1,4 @@
+#include <iostream>
 #include <Eigen/Dense>
 
 #include <ancse/cfl_condition.hpp>
@@ -17,6 +18,7 @@ Eigen::VectorXd ic(const F &f, const Grid &grid) {
 }
 
 TimeLoop make_fvm(const Grid &grid) {
+    //std::cout<<"make_fvm fn beginning"<<std::endl;
     auto config = get_global_config();
     double t_end = config["t_end"];
     double cfl_number = config["cfl_number"];
@@ -37,12 +39,14 @@ TimeLoop make_fvm(const Grid &grid) {
     auto snapshot_writer = std::make_shared<JSONSnapshotWriter>(
         grid, simulation_time, std::string(config["output"]));
 
+    //std::cout<<"make_fvm just before return TimeLoop"<<std::endl;
     return TimeLoop(
         simulation_time, time_integrator, cfl_condition, snapshot_writer);
 }
 
 template <class F>
 void run_test(const F &f) {
+    //std::cout<<"run test fn beginning"<<std::endl;
     auto config = get_global_config();
 
     int n_ghost = config["n_ghost"];
@@ -51,8 +55,11 @@ void run_test(const F &f) {
     auto grid = Grid({0.0, 1.0}, n_cells, n_ghost);
     auto u0 = ic(f, grid);
 
+    //std::cout<<"run test just before make_fvm"<<std::endl;
     auto fvm = make_fvm(grid);
+    //std::cout<<"run test just after make_fvm"<<std::endl;
     fvm(u0);
+    //std::cout<<"run test fvm finished"<<std::endl;
 }
 
 void smooth_sine_test() {
@@ -97,7 +104,9 @@ int main() {
 
     std::string ic_key = config["initial_conditions"];
     if (ic_key == "sine") {
+	std::cout<<"todo smoothsine"<<std::endl;
         smooth_sine_test();
+	std::cout<<"smoothsine done"<<std::endl;
     } else if (ic_key == "jump") {
         jump_test();
     } else if (ic_key == "backward-jump") {

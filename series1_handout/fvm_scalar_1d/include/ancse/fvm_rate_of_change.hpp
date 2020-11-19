@@ -1,6 +1,8 @@
 #ifndef FVMSCALAR1D_FVM_RATE_OF_CHANGE_HPP
 #define FVMSCALAR1D_FVM_RATE_OF_CHANGE_HPP
 
+#include <iostream>
+
 #include <Eigen/Dense>
 #include <ancse/grid.hpp>
 #include <ancse/model.hpp>
@@ -36,8 +38,13 @@ class FVMRateOfChange : public RateOfChange {
 	double FL,FR;
 	double uLL,uLR,uRL,uRR;
 
-	for (int j=1;j<n_cells-1;j++) {
+	for (int j=2;j<n_cells-2;j++) {
+	    //std::cout<<"j: "<<j<<std::endl;
+            //std::cout<<"u0 size: "<<u0.size()<<std::endl;
+	    //std::cout<<u0[0]<<std::endl;
+	    //std::cout<<u0[1]<<std::endl;
 	    auto recL = reconstruction(u0,j-1);
+	    //std::cout<<"FVMRateOfChange () operator just after first rec call"<<std::endl;
 	    auto recR = reconstruction(u0,j);
 
 	    uLL = std::get<0>(recL);
@@ -46,6 +53,7 @@ class FVMRateOfChange : public RateOfChange {
 	    uRR = std::get<1>(recR);
 
 	    FL = numerical_flux(uLL,uLR); //-1/2
+	    //std::cout<<"FVMRateOfChange () operator just after first nf call"<<std::endl;
 	    FR = numerical_flux(uRL,uRR); //+1/2
 	    dudt[j] = -1.0*(FR-FL)/dx;
 	}
