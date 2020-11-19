@@ -2,10 +2,10 @@
   "output": "testing-",
 
   "initial_conditions": "sine",
-  "boundary_condition": "outflow",
+  "boundary_condition": "periodic",
   "reconstruction": "minmod",
-  "time_integrator": "forward_euler",
-  "flux": "central_flux",
+  "time_integrator": "ssp2",
+  "flux": "godunov",
 
   "n_interior_cells": 100,
   "n_ghost": 2,

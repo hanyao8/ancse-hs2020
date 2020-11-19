@@ -26,6 +26,7 @@ if __name__ == "__main__":
     stem = sys.argv[1]
 
     files = sorted(glob.glob(f"{stem}*.json"))
+    print(files)
 
     plt.ion()
     plt.show()

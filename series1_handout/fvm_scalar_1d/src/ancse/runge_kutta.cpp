@@ -1,3 +1,4 @@
+#include <iostream>
 #include <ancse/runge_kutta.hpp>
 
 #include <ancse/config.hpp>
@@ -34,10 +35,12 @@ ForwardEuler::ForwardEuler(
 
 void ForwardEuler::
 operator()(Eigen::VectorXd &u1, const Eigen::VectorXd &u0, double dt) const {
-
+    //std::cout<<"ForwardEuler () operator beginning"<<std::endl;
     (*rate_of_change)(dudt, u0);
+    //std::cout<<"ForwardEuler () operator just after rate_of_change call"<<std::endl;
     u1 = u0 + dt * dudt;
     (*boundary_condition)(u1);
+    //std::cout<<"ForwardEuler () operator just after boundary_condition call"<<std::endl;
 }
 
 

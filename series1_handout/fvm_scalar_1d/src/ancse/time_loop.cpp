@@ -13,15 +13,19 @@ TimeLoop::TimeLoop(std::shared_ptr<SimulationTime> simulation_time,
       snapshot_writer(std::move(snapshot_writer)) {}
 
 void TimeLoop::operator()(Eigen::VectorXd u0) const {
+    //std::cout<<"TimeLoop () operator beginning"<<std::endl;
     Eigen::VectorXd u1(u0.size());
 
     double dt = simulation_time->dt = (*cfl_condition)(u0);
     double t = 0.0;
 
+    //std::cout<<"TimeLoop () operator just before while"<<std::endl;
     while (!is_finished(*simulation_time)) {
         (*time_integrator)(u1, u0, simulation_time->dt);
+        //std::cout<<"TimeLoop () operator just after time_integrator call"<<std::endl;
 
         simulation_time->advance();
+        //std::cout<<"TimeLoop () operator just after simulation_time advance call"<<std::endl;
         t += dt;
 
         dt = (*cfl_condition)(u1);
