@@ -56,12 +56,17 @@ std::shared_ptr<RateOfChange> make_fvm_rate_of_change(
     REGISTER_RECONSTRUCTION("o1", PWConstantReconstruction{})
 
     // Register piecewise linear reconstructions.
-    // I'm unable to debug this, compilation passes apart from this issue
-    REGISTER_RECONSTRUCTION("minmod",PWLinearReconstruction{MinMod{},0})
-    REGISTER_RECONSTRUCTION("superbee",PWLinearReconstruction{SuperBee{},0})
-    REGISTER_RECONSTRUCTION("monotonized_central",
-            PWLinearReconstruction{MonotonizedCentral{},0})
+    auto minmod = MinMod{};
+    PWLinearReconstruction pwlr_minmod = PWLinearReconstruction<MinMod,0>(minmod);
+    REGISTER_RECONSTRUCTION("minmod",pwlr_minmod)
 
+    auto superbee = SuperBee{};
+    PWLinearReconstruction pwlr_superbee = PWLinearReconstruction<SuperBee,0>(superbee);
+    REGISTER_RECONSTRUCTION("superbee",pwlr_superbee)
+
+    auto monocent = MonotonizedCentral{};
+    PWLinearReconstruction pwlr_monocent = PWLinearReconstruction<MonotonizedCentral,0>(monocent);
+    REGISTER_RECONSTRUCTION("monotonized_central",pwlr_monocent)
 
     throw std::runtime_error(fmt::format(
         "Unknown reconstruction. [{}]", std::string(config["reconstruction"])));
