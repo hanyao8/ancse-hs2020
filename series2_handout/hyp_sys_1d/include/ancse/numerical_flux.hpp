@@ -211,7 +211,75 @@ class HLLCEuler {
     Eigen::VectorXd operator()(const Eigen::VectorXd &uL,
                                const Eigen::VectorXd &uR) const
     {
-        return Eigen::VectorXd();
+        auto fL = model->flux(uL);
+        auto fR = model->flux(uR);
+
+        Eigen::VectorXd uRoe = model->roe_avg(uL,uR);
+        
+        int n_vars = model->get_nvars();
+        Eigen::VectorXd uL_eigvals = model->eigenvalues(uL);
+        Eigen::VectorXd uR_eigvals = model->eigenvalues(uR);
+        Eigen::VectorXd uRoe_eigvals = model->eigenvalues(uRoe);
+
+        double sL = std::numeric_limits<double>::max();
+        for (int i=0;i<n_vars;++i){
+            sL = std::min(sL,uL_eigvals(i));
+            sL = std::min(sL,uRoe_eigvals(i));
+        }
+
+        double sR = std::numeric_limits<double>::lowest();
+        for (int i=0;i<n_vars;++i){
+            sR = std::max(sR,uR_eigvals(i));
+            sR = std::max(sR,uRoe_eigvals(i));
+        }
+
+        double vL = uL(1)/uL(0);
+        double vR = uR(1)/uR(0);
+
+        double pL = model->pressure(uL(0),vL,uL(2));
+        double pR = model->pressure(uR(0),vR,uR(2));
+        //9.33
+        double sM = uR(1)*(sR-vR)-uL(1)*(sL-vL)-(pR-pL);
+        sM = sM/(uR(0)*(sR-vR)-uL(0)*(sL-vL));
+
+        //9.31
+        double rho_intL = uL(0)*(vL-sL)/(sM-sL);
+        double rho_intR = uR(0)*(vR-sR)/(sM-sR);
+
+        //9.34
+        double p_int = pL+uL(0)*(vL-sM)*(vL-sL);
+
+        double gamma = model->get_gamma();
+
+        Eigen::VectorXd u_intL(n_vars);
+        u_intL(0) = rho_intL;
+        u_intL(1) = rho_intL*sM;
+        u_intL(2) = p_int/(gamma-1) + 0.5*rho_intL*sM*sM;
+
+        Eigen::VectorXd u_intR(n_vars);
+        u_intR(0) = rho_intR;
+        u_intR(1) = rho_intR*sM;
+        u_intR(2) = p_int/(gamma-1) + 0.5*rho_intR*sM*sM;
+
+        Eigen::VectorXd f_intL = fL + sL*(u_intL-uL);
+        Eigen::VectorXd f_intR = fR + sR*(u_intR-uR);
+
+        Eigen::VectorXd result;
+        if (sL>0) {
+            result = fL;
+        }
+        else if (sL<=0 && sM>0) {
+            result = f_intL;
+        }
+        else if (sM<=0 && sR>0) {
+            result = f_intR;
+        }
+        else {
+            result = fR;
+        }
+
+        return result;       
+        //return Eigen::VectorXd();
     }
 
   private:

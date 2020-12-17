@@ -3,6 +3,7 @@
 #include <Eigen/Dense>
 #include <ancse/numerical_flux.hpp>
 #include <ancse/reconstruction.hpp>
+#include <ancse/limiters.hpp>
 #include <fmt/format.h>
 
 #define REGISTER_NUMERICAL_FLUX(token, FluxType, flux)                         \
@@ -55,10 +56,12 @@ std::shared_ptr<RateOfChange> make_fvm_rate_of_change(
     REGISTER_RECONSTRUCTION("o1", PWConstantReconstruction{})
 
     // Register piecewise linear reconstructions.
-    REGISTER_RECONSTRUCTION("minmod",PWLinearReconstruction{MinMod{}})
-    REGISTER_RECONSTRUCTION("superbee",PWLinearReconstruction{SuperBee{}})
+    // I'm unable to debug this, compilation passes apart from this issue
+    REGISTER_RECONSTRUCTION("minmod",PWLinearReconstruction{MinMod{},0})
+    REGISTER_RECONSTRUCTION("superbee",PWLinearReconstruction{SuperBee{},0})
     REGISTER_RECONSTRUCTION("monotonized_central",
-            PWLinearReconstruction{MonotonizedCentral{}})
+            PWLinearReconstruction{MonotonizedCentral{},0})
+
 
     throw std::runtime_error(fmt::format(
         "Unknown reconstruction. [{}]", std::string(config["reconstruction"])));
