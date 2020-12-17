@@ -22,6 +22,11 @@ deduce_numerical_flux(const nlohmann::json &config,
     REGISTER_NUMERICAL_FLUX("central_flux", CentralFlux, CentralFlux(model))
 
     // Register the other numerical fluxes.
+    REGISTER_NUMERICAL_FLUX("lax_friedrichs",LaxFriedrichs,
+            LaxFriedrichs(grid,model,simulation_time))
+    REGISTER_NUMERICAL_FLUX("rusanov",Rusanov,Rusanov(model))
+    REGISTER_NUMERICAL_FLUX("roe",Roe,Roe(model))
+    REGISTER_NUMERICAL_FLUX("hll",HLL,HLL(model))
 
     if (model->get_name().compare("euler") == 0) {
         auto model_euler = std::dynamic_pointer_cast<Euler>(model);
@@ -50,6 +55,10 @@ std::shared_ptr<RateOfChange> make_fvm_rate_of_change(
     REGISTER_RECONSTRUCTION("o1", PWConstantReconstruction{})
 
     // Register piecewise linear reconstructions.
+    REGISTER_RECONSTRUCTION("minmod",PWLinearReconstruction{MinMod{}})
+    REGISTER_RECONSTRUCTION("superbee",PWLinearReconstruction{SuperBee{}})
+    REGISTER_RECONSTRUCTION("monotonized_central",
+            PWLinearReconstruction{MonotonizedCentral{}})
 
     throw std::runtime_error(fmt::format(
         "Unknown reconstruction. [{}]", std::string(config["reconstruction"])));

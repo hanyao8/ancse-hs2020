@@ -80,10 +80,24 @@ class PWLinearReconstruction<SlopeLimiter, Conserved> {
     {
 
         ///  ANCSE_COMMENT Implement here the reconstruction using conservative variables.
+        int n_vars = up.rows();
 
-        return {std::move(Eigen::VectorXd()), std::move(Eigen::VectorXd())};
+	    auto sb = ub-ua; //j
+	    auto sc = uc-ub; //j+1
+	    auto sd = ud-uc; //j+2
+   
+        Eigen::VectorXd sigmaL(n_vars);
+        Eigen::VectorXd sigmaR(n_vars);
 
+        for (int i=0; i<n_vars; ++i){
+	        sigmaL(i) = slope_limiter(sc(i),sb(i)); //j
+	        sigmaR(i) = slope_limiter(sd(i),sc(i)); //j+1
+        }
+    
+        Eigen::VectorXd uL = ub + 0.5*sigmaL; //j
+        Eigen::VectorXd uR = uc - 0.5*sigmaR; //j+1
 
+        return {std::move(uL), std::move(uR)};
     }
 
   private:
@@ -103,6 +117,7 @@ class PWLinearReconstruction<SlopeLimiter, Primitive> {
         up.resize(u.rows(),u.cols());
         for (int i = 0; i < u.cols(); ++i) {
             ///  ANCSE_COMMENT Implement here the transformation from conservative to primitive.
+            up.col(i) = model->cons_to_prim(u.col(i));
         }
     }
 
@@ -123,10 +138,25 @@ class PWLinearReconstruction<SlopeLimiter, Primitive> {
 
         ///  ANCSE_COMMENT Implement here the reconstruction using primitive variables.
         ///  ANCSE_COMMENT The transformation can be done above.
+        int n_vars = model->get_nvars();
 
+	    auto sb = ub-ua; //j
+	    auto sc = uc-ub; //j+1
+	    auto sd = ud-uc; //j+2
+   
+        Eigen::VectorXd sigmaL(n_vars);
+        Eigen::VectorXd sigmaR(n_vars);
 
-        return {std::move(Eigen::VectorXd()), std::move(Eigen::VectorXd())};
+        for (int i=0; i<n_vars; ++i){
+	        sigmaL(i) = slope_limiter(sc(i),sb(i)); //j
+	        sigmaR(i) = slope_limiter(sd(i),sc(i)); //j+1
+        }
+    
+        Eigen::VectorXd uL = ub + 0.5*sigmaL; //j
+        Eigen::VectorXd uR = uc - 0.5*sigmaR; //j+1
 
+        return {std::move(uL), std::move(uR)};
+        //return {std::move(Eigen::VectorXd()), std::move(Eigen::VectorXd())};
     }
 
   private:

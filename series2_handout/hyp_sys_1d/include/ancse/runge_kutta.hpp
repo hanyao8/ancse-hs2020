@@ -103,6 +103,16 @@ class SSP2 : public RungeKutta {
                             double dt) const override
     {
         // implement RK here.
+
+        (*rate_of_change)(dudt,u0);
+        u_star = u0+dt*dudt;
+        (*boundary_condition)(u_star);
+
+        (*rate_of_change)(dudt,u_star);
+        u_star = u_star+dt*dudt;
+
+        u1 = 0.5*(u0+u_star);
+        (*boundary_condition)(u1);
     }
 
   private:

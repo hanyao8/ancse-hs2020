@@ -61,7 +61,12 @@ class LaxFriedrichs {
                                const Eigen::VectorXd &uR) const {
         double dx = grid.dx;
         double dt = simulation_time->dt;
-        return Eigen::VectorXd();
+
+        auto fL = model->flux(uL);
+        auto fR = model->flux(uR);
+
+        return 0.5*(fL+fR) - 0.5*(dx/dt)*(uR-uL);
+        //return Eigen::VectorXd();
     }
 
   private:
@@ -83,7 +88,14 @@ class Rusanov {
     Eigen::VectorXd operator()(const Eigen::VectorXd &uL,
                                const Eigen::VectorXd &uR) const
     {
-        return Eigen::VectorXd();
+        auto fL = model->flux(uL);
+        auto fR = model->flux(uR);
+       
+        double max_eigvalL = model->max_eigenvalue(uL);
+        double max_eigvalR = model->max_eigenvalue(uR);
+        double s = std::max(max_eigvalL,max_eigvalR);
+
+        return 0.5 * (fL + fR) - 0.5*s*(uR-uL);
     }
 
   private:
@@ -104,7 +116,25 @@ class Roe{
     Eigen::VectorXd operator()(const Eigen::VectorXd &uL,
                                const Eigen::VectorXd &uR) const
     {
-        return Eigen::VectorXd();
+        auto fL = model->flux(uL);
+        auto fR = model->flux(uR);
+
+        Eigen::VectorXd uRoe = model->roe_avg(uL,uR);
+
+        int n_vars = model->get_nvars();
+        Eigen::VectorXd uRoe_eigvals = model->eigenvalues(uRoe);
+
+        Eigen::MatrixXd Lambda = Eigen::MatrixXd::Zero(n_vars,n_vars);
+        Lambda(0,0) = std::abs(uRoe_eigvals(0));
+        Lambda(1,1) = std::abs(uRoe_eigvals(1));
+        Lambda(2,2) = std::abs(uRoe_eigvals(2));
+
+        Eigen::MatrixXd R = model->eigenvectors(uRoe);
+
+        Eigen::MatrixXd s = R*Lambda*(R.inverse());
+
+        return 0.5 * (fL + fR) - 0.5*s*(uR-uL);
+        //return Eigen::VectorXd();
     }
 
   private:
@@ -124,7 +154,41 @@ class HLL {
     Eigen::VectorXd operator()(const Eigen::VectorXd &uL,
                                const Eigen::VectorXd &uR) const
     {
-        return Eigen::VectorXd();
+        auto fL = model->flux(uL);
+        auto fR = model->flux(uR);
+
+        Eigen::VectorXd uRoe = model->roe_avg(uL,uR);
+        
+        int n_vars = model->get_nvars();
+        Eigen::VectorXd uL_eigvals = model->eigenvalues(uL);
+        Eigen::VectorXd uR_eigvals = model->eigenvalues(uR);
+        Eigen::VectorXd uRoe_eigvals = model->eigenvalues(uRoe);
+
+        double sL = std::numeric_limits<double>::max();
+        for (int i=0;i<n_vars;++i){
+            sL = std::min(sL,uL_eigvals(i));
+            sL = std::min(sL,uRoe_eigvals(i));
+        }
+
+        double sR = std::numeric_limits<double>::lowest();
+        for (int i=0;i<n_vars;++i){
+            sR = std::max(sR,uR_eigvals(i));
+            sR = std::max(sR,uRoe_eigvals(i));
+        }
+
+        Eigen::VectorXd result;
+        if (sL>=0) {
+            result = fL;
+        }
+        else if (sL<0 && sR>0) {
+            result = (sR*fL-sL*fR+sR*sL*(uR-uL))/(sR-sL);
+        }
+        else if (sR<=0) {
+            result = fR;
+        }
+
+        return result;
+        //return Eigen::VectorXd();
     }
 
   private:

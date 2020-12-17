@@ -109,8 +109,7 @@ class Euler : public Model {
     ///  ANCSE_COMMENT Add more functions if needed.
     //----------------ModelEulerBegin----------------
     inline std::tuple<double, double, double>
-    primitive(const Eigen::VectorXd &u_cons) const
-    {
+    primitive(const Eigen::VectorXd &u_cons) const {
 
         ///  ANCSE_COMMENT Convert conservative to primitive;
         ///  ANCSE_COMMENT double rho=0.;
@@ -118,6 +117,11 @@ class Euler : public Model {
         ///  ANCSE_COMMENT double p=0.;
         ///  ANCSE_COMMENT return std::make_tuple (rho, v, p);
 
+        double rho = u_cons(0);
+        double v = u_cons(1)/u_cons(0);
+        double p = pressure(u_cons(0),v,u_cons(2));
+
+        return std::make_tuple (rho,v,p);
 
     }
 
@@ -146,13 +150,28 @@ class Euler : public Model {
 
         Eigen::VectorXd eigvals(n_vars);
         ///  ANCSE_COMMENT Compute eigenvalues
+        eigvals(0) = v-c;
+        eigvals(1) = v;
+        eigvals(2) = v+c;
         return eigvals;
     }
 
-    inline Eigen::MatrixXd eigenvectors(double v, double H) const
+    inline Eigen::MatrixXd eigenvectors(double v, double c, double H) const
     {
         Eigen::MatrixXd eigvecs(n_vars, n_vars);
         ///  ANCSE_COMMENT Compute eigenvectors
+        
+        eigvecs (0,0) = 1;
+        eigvecs (0,1) = 1;
+        eigvecs (0,2) = 1;
+
+        eigvecs (1,0) = v-c;
+        eigvecs (1,1) = v;
+        eigvecs (1,2) = v+c;
+
+        eigvecs (2,0) = H-v*c;
+        eigvecs (2,1) = 0.5*v*v;
+        eigvecs (2,2) = H+v*c;
 
         return eigvecs;
     }

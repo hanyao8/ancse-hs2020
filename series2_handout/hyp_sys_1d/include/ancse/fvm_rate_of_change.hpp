@@ -45,6 +45,14 @@ class FVMRateOfChange : public RateOfChange {
 
         reconstruction.set(u0);
         // implement the flux loop here.
+
+        for (int i = n_ghost-1; i<n_cells-n_ghost; ++i) {
+            std::tie(uL,uR) = reconstruction(i);
+            fL = fR;
+            fR = numerical_flux(uL,uR);
+
+            dudt.col(i) = (fL-fR)/dx;
+        }
     }
     //----------------FVMRateOfChangeEnd----------------
 

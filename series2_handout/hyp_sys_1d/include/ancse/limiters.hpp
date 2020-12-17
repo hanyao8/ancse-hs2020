@@ -18,25 +18,49 @@ inline double minmod(double a, double b, double c) {
     return minmod(a, minmod(b, c));
 }
 
+inline double minmod3(double a, double b, double c) {
+    double result;
+    double epsilon = 1e-9;
+    if ( sign(a)+sign(b)+sign(c)+epsilon > 3.0 ) {
+        result = std::min(std::abs(a),std::abs(b));
+	result = 1.0 * std::min(result,std::abs(c));
+    }
+    else if ( sign(a)+sign(b)+sign(c)-epsilon < -3.0 ) {
+        result = std::min(std::abs(a),std::abs(b));
+	result = -1.0 * std::min(result,std::abs(c));
+    }
+    else {
+        result = 0.0;
+    }
+    return result;
+}
+
+
+
 /// FVM slope limiters
 
 //----------------LimitersBegin----------------  
 struct MinMod {
     inline double operator()(double a, double b) const
     {
-        return 0.;
+        return minmod(a,b);
+        //return 0.;
     }
 };
 
 struct SuperBee {
     inline double operator()(double sL, double sR) const {
-        return 0.;
+	    double minmodL = minmod(2.0*sL, 1.0*sR);
+	    double minmodR = minmod(1.0*sL, 2.0*sR);
+        return maxmod(minmodL, minmodR);
+        //return 0.;
     }
 };
 
 struct MonotonizedCentral {
     inline double operator()(double sL, double sR) const {
-        return 0.;
+        return minmod3(2.0*sR,0.5*(sL+sR),2.0*sL);
+        //return 0.;
     }
 };
 //----------------LimitersEnd----------------  
